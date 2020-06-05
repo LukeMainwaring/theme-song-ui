@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { CREATE_GAME } from '../actions/games';
 
 const INITIAL_STATE = {

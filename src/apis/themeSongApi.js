@@ -1,5 +1,20 @@
 import axios from 'axios';
 
-export default axios.create({
-  baseURL: 'http://localhost:8080',
+let instance = axios.create({
+  baseURL: '',
 });
+
+if (process.env.NODE_ENV === 'development') {
+  instance = axios.create({
+    baseURL: '/api',
+  });
+} else {
+  // Production server
+  instance = axios.create({
+    // TODO: Replace with AWS url
+    // baseURL:
+    // 'http://ontrackserver-env.pikgvbwvcg.us-east-1.elasticbeanstalk.com/'
+  });
+}
+
+export { instance as default };

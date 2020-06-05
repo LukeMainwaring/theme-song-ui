@@ -4,7 +4,7 @@ import history from '../history';
 export const CREATE_GAME = 'CREATE_GAME';
 
 export const createGame = () => async (dispatch) => {
-  const response = await themeSongApi.post('/createGame');
+  const response = await themeSongApi.get('/createGame');
   dispatch({ type: CREATE_GAME, payload: response.data });
   history.push('/');
 };
