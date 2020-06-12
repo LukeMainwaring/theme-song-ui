@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Grid, Typography, withStyles } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
 
-import { createGame } from '../actions/games';
+import { createGame, initGame } from '../actions/games';
 
-const Lobby = ({ classes, createGame, words }) => {
+const Lobby = ({ classes, createGame, initGame, gameIdWords }) => {
+  const [gameId, setGameId] = useState('');
+
+  // TODO: Figure out how to setGameId once value is in reducer
+  useEffect(() => {
+    initGame();
+  }, []);
+
   return (
     <div>
-      <Typography variant='h1' component='h2' align='center'>
+      <Typography variant='h2' component='h2' align='center'>
         Theme Song
       </Typography>
       <Grid alignItems='center' container justify='center' spacing={2}>
@@ -23,21 +36,26 @@ const Lobby = ({ classes, createGame, words }) => {
             Create New Game
           </Button>
         </Grid>
+        <Grid item>
+          <TextField id='outlined-basic' label='Game ID' variant='outlined' />
+        </Grid>
       </Grid>
 
-      <span>{words}</span>
+      <div>{gameIdWords}</div>
+      <div>{gameId}</div>
     </div>
   );
 };
 
 const mapStateToProps = ({ games }) => {
-  return { words: games.words };
+  return { gameIdWords: games.gameId };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       createGame,
+      initGame,
     },
     dispatch
   );

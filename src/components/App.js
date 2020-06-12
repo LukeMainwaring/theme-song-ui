@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import Lobby from './Lobby';
+import Game from './Game';
 import history from '../history';
 
 const App = () => {
@@ -10,7 +11,7 @@ const App = () => {
         <div>
           <Switch>
             <Route path='/' exact component={Lobby} />
-            {/* <Route path='/game/:id' exact component={GameShow} /> */}
+            <Route path='/:gameId' exact component={Game} />
           </Switch>
         </div>
       </Router>
